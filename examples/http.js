@@ -1,9 +1,8 @@
 
-var prefork = require('../../build/Release/prefork').prefork;
+var prefork = require('../lib/prefork');
+var http = require('http');
 
 prefork();
-
-var http = require('http');
 
 http.createServer(function (req, res) {
   res.end('I am still running');
