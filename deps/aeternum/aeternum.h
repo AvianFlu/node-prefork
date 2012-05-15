@@ -7,15 +7,17 @@ extern "C" {
 
 #include "options.h"
 
-extern options_t aeternum_options(int argc, char *argv[]);
+options_t aeternum_options(int argc, char *argv[]);
 
-extern void aeternum_start(options_t opts);
+void aeternum_start(options_t opts);
 
-extern void aeternum_fork();
+int aeternum_fork();
 
-extern void aeternum_redirect(const char *filename, int fileno);
+int aeternum_redirect(const char *filename, int fileno);
 
-extern void aeternum_exec(const char *filename, char *args[]);
+int aeternum_dup(int oldfd, int newfd);
+
+void aeternum_exec(const char *filename, char *args[]);
 
 #endif
 

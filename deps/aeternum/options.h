@@ -10,6 +10,7 @@ struct options_s {
   char *errfile;
   char *target;
   int json;
+  int silent;
   char **child_args;
 };
 
