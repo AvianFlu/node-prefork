@@ -13,6 +13,11 @@
       "include_dirs": [
         "deps/aeternum"
       ],
+      "CCFLAGS": [
+        "-fPIC",
+        "-Wall",
+        "-pedantic"
+      ],
       "sources": [
         "deps/aeternum/aeternum.c"
       ]

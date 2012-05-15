@@ -18,7 +18,7 @@ def build(bld):
   aeternum.target = "aeternum"
   aeternum.source = ["deps/aeternum/aeternum.c"]
   aeternum.includes = "deps/aeternum/"
-  aeternum.ccflags = "-fPIC"
+  aeternum.ccflags = ["-fPIC", "-Wall", "-pedantic"]
   prefork = bld.new_task_gen("cxx", "shlib", "node_addon", add_objects="aeternum")
   prefork.target = "prefork"
   prefork.source = ["src/prefork.cc"]
