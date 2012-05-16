@@ -11,18 +11,12 @@ using namespace node;
 static Handle<Value> Prefork(const Arguments& args) {
   HandleScope scope;
   
-  int stdio_fds[3] = { -1, -1, -1 };
-  // Take the options object out of args[0]
-  Local<Object> js_options = args[0]->ToObject();
-  // Trying to ->Get() properties of empty objects will segfault.
-  if (!js_options.IsEmpty()) {
-    Local<Value> custom_fds_v = js_options->Get(String::NewSymbol("customFds"));
-    if (!custom_fds_v.IsEmpty() && custom_fds_v->IsArray()) {
-      Local<Array> custom_fds = Local<Array>::Cast(custom_fds_v);
-      int i;
-      for(i = 0; i < 3; i++) {
-        stdio_fds[i] = custom_fds->Get(i)->Int32Value();
-      }
+  int i, stdio_fds[3] = { -1, -1, -1 };
+
+  if (!args[0].IsEmpty() && args[0]->IsArray()) {
+    Local<Array> custom_fds = Local<Array>::Cast(args[0]);
+    for(i = 0; i < 3; i++) {
+      stdio_fds[i] = custom_fds->Get(i)->Int32Value();
     }
   }
 
