@@ -37,8 +37,8 @@ static Handle<Value> Prefork(const Arguments& args) {
     return ThrowException(ErrnoException(errno, "aeternum_dup()"));
   }
 
-  // return null, since any error would have made things blow up by now.
-  return scope.Close(Null());
+  // return the new pid of the child process.
+  return scope.Close(Integer::New(getpid()));
 }
 
 
