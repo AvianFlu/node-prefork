@@ -58,13 +58,15 @@ application logic starts.
 var http = require('http'),
     prefork = require('prefork');
 
-prefork();
+var pid = prefork();
 
 http.createServer(function (req, res) {
-  res.end('I am a backgrounded HTTP server.');
+  res.end('I am a backgrounded HTTP server, running as ' + pid);
 }).listen(8080);
 
 ```
+`prefork()` will perform all necessary actions to background your process, and
+return the new `pid`.
 
 ### stdio redirection
 
@@ -74,9 +76,11 @@ To simply log all output to a file:
 
 ```js
 
-prefork({
+var pid = prefork({
   stdout: 'output.log'
 });
+
+console.log('Started successfully, new pid is %d', pid);
 
 ```
 
